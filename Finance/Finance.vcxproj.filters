@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\marketdata">
+      <UniqueIdentifier>{0e3d3f15-c329-416f-b6ac-a7a462074b4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\curve">
+      <UniqueIdentifier>{766f3f8b-2bed-4bee-809f-c558cf4ec7dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\marketdata">
+      <UniqueIdentifier>{f0d919a1-c6fd-4bed-8ae2-369f1db5fef0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generic">
+      <UniqueIdentifier>{c3bec72b-9fb7-4878-9d2c-650a5cf8192d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\curve">
+      <UniqueIdentifier>{bc3c3ad6-992b-4f2f-a198-d4468dd97e2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generic">
+      <UniqueIdentifier>{209512e7-f3f0-491f-a4c8-39f08e1aa3d7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="marketdata.h">
+      <Filter>Header Files\marketdata</Filter>
+    </ClInclude>
+    <ClInclude Include="date.h">
+      <Filter>Header Files\generic</Filter>
+    </ClInclude>
+    <ClInclude Include="market_data_component.h">
+      <Filter>Header Files\marketdata</Filter>
+    </ClInclude>
+    <ClInclude Include="calendar.h">
+      <Filter>Header Files\marketdata</Filter>
+    </ClInclude>
+    <ClInclude Include="curve_interface.h">
+      <Filter>Header Files\curve</Filter>
+    </ClInclude>
+    <ClInclude Include="curve_ir.h">
+      <Filter>Header Files\curve</Filter>
+    </ClInclude>
+    <ClInclude Include="curve_factory.h">
+      <Filter>Header Files\curve</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="market_data_component.cpp">
+      <Filter>Source Files\marketdata</Filter>
+    </ClCompile>
+    <ClCompile Include="curve_ir.cpp">
+      <Filter>Source Files\curve</Filter>
+    </ClCompile>
+    <ClCompile Include="curve_factory.cpp">
+      <Filter>Source Files\curve</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="date.cpp">
+      <Filter>Source Files\generic</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
