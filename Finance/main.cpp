@@ -13,6 +13,7 @@ int main()
 	assert(month15.ToNumString() == "1/4/2001");*/
 
 	auto curve = CurveFactory::Instance().Create("InterestRate");
+	curve->GenerateCurve();
 	curve->Serialize();
 
 	return 0;

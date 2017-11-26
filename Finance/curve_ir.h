@@ -4,22 +4,15 @@
 #include "date.h"
 #include <set>
 
-struct CurvePoint
-{
-	Dates::Date _date;
-	double _rate;
-
-	CurvePoint() : _date(Dates::Date()), _rate(0.0) {};
-	CurvePoint(Dates::Date Date, double Rate) : _date(Date), _rate(Rate) {};
-};
-
+using namespace CurveData;
+/*
 struct CurvePointComparator
 {
 	bool operator()(const CurvePoint& Left, const CurvePoint& Right) const
 	{
 		return Dates::Date::Compare(Left._date, Right._date);
 	}
-};
+};*/
 
 struct MarketDataComponentComparator
 {
@@ -32,14 +25,19 @@ struct MarketDataComponentComparator
 class InterestRateCurve : public CurveInterface
 {
 	private:
-		std::set< CurvePoint, CurvePointComparator > _points;
+		std::vector< CurvePoint > _points;
 		std::set< MarketDataComponent, MarketDataComponentComparator > _marketData;
 
 		CurveData::SCurveType _type;
 		CurveData::SCurveInterpolationMethod _interpolationMethod;
+		CurveData::EFrequency _frequency;
+		
 		std::string _currency;
 		std::string _index;
 		Dates::Date _curveDate;
+
+		CurvePoint LinearInterpolation(CurvePoint& First, CurvePoint& Second, Dates::Date& TargetDate);
+		void LinearInterpolationRange(CurvePoint& Left, CurvePoint& Right);
 	public:
 		InterestRateCurve();
 		InterestRateCurve(const InterestRateCurve& ToCopy);

@@ -14,52 +14,7 @@ Dates::Date::Date()
 Dates::Date::Date(const std::string& Term)
 {
 	(*this) = Date();
-
-	std::string data = Term.substr(0, Term.length() - 1);
-	int intData = std::stoi(data);
-
-	std::string termType = Term.substr(Term.length() - 1, 1);
-
-	if (termType == "D")
-	{
-		_day._value += intData;
-
-		int months = (int) _month._value;
-
-		while (_day._value > 31)
-		{
-			_day._value -= 31;
-			months++;
-		}
-
-		while (months > 12)
-		{
-			months -= 12;
-			_year++;
-		}
-
-		_month = EMonth(months);
-	}
-	else if (termType == "M")
-	{
-		int months = (int)_month._value + intData;
-
-		while (months > 12)
-		{
-			months -= 12;
-			_year++;
-		}
-
-		_month = EMonth(months);
-	}
-	else if (termType == "Y")
-	{
-		_year += intData;
-	}
-	else
-	{
-		assert(false);
-	}
+	AddTerm(Term);
 }
 
 Dates::Date::Date(SDay Day, SMonth Month, unsigned int Year) :
@@ -105,6 +60,55 @@ std::string Dates::Date::ToStr(bool StringMoth)
 	return out;
 }
 
+void Dates::Date::AddTerm(const std::string & Term)
+{
+	std::string data = Term.substr(0, Term.length() - 1);
+	int intData = std::stoi(data);
+
+	std::string termType = Term.substr(Term.length() - 1, 1);
+
+	if (termType == "D")
+	{
+		_day._value += intData;
+
+		int months = (int)_month._value;
+
+		while (_day._value > 31)
+		{
+			_day._value -= 31;
+			months++;
+		}
+
+		while (months > 12)
+		{
+			months -= 12;
+			_year++;
+		}
+
+		_month = EMonth(months);
+	}
+	else if (termType == "M")
+	{
+		int months = (int)_month._value + intData;
+
+		while (months > 12)
+		{
+			months -= 12;
+			_year++;
+		}
+
+		_month = EMonth(months);
+	}
+	else if (termType == "Y")
+	{
+		_year += intData;
+	}
+	else
+	{
+		assert(false);
+	}
+}
+
 std::string Dates::Date::ToNumString()
 {
 	return ToStr(false);
@@ -115,28 +119,37 @@ std::string Dates::Date::ToString()
 	return ToStr(true);
 }
 
-bool Dates::Date::Compare(const Date& Left, const Date& Right)
+int Dates::Date::Compare(const Date& Left, const Date& Right)
 {
+	static const int equals = 0;
+	static const int less = -1;
+	static const int great = 1;
+
+	if (Left._year == Right._year && Left._month == Right._month && Left._day == Right._day)
+	{
+		return equals;
+	}
+
 	if (Left._year < Right._year)
 	{
-		return true;
+		return less;
 	}
 	else if (Left._year == Right._year)
 	{
 		if (Left._month._value < Right._month._value)
 		{
-			return true;
+			return less;
 		}
 		else if (Left._month._value == Right._month._value)
 		{
 			if (Left._day._value < Right._day._value)
 			{
-				return true;
+				return less;
 			}
 		}
 	}
 
-	return false;
+	return great;
 }
 
 void Dates::Date::AddOneDay()
@@ -167,4 +180,9 @@ void Dates::Date::AddOneMonth()
 void Dates::Date::AddOneYear()
 {
 	_year++;
+}
+
+int Dates::Date::ToNumDays()
+{
+	return (int)(_year * 365 + (int)_month._value * 31 + _day._value);
 }

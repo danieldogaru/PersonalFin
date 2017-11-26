@@ -2,6 +2,7 @@
 #include <string>
 #include <assert.h>
 #include <map>
+#include "date.h"
 
 namespace CurveData
 {
@@ -63,6 +64,29 @@ namespace CurveData
 			}
 
 			return returnValue;
+		}
+	};
+
+	enum EFrequency
+	{
+		DAILY = 1,
+		MONTHLY = 31,
+		QUATERLY = 3 * MONTHLY,
+		SEMIANNUALLY = 6 * MONTHLY,
+		ANNUALY = 12 * MONTHLY
+	};
+
+	struct CurvePoint
+	{
+		Dates::Date _date;
+		double _rate;
+
+		CurvePoint() : _date(Dates::Date()), _rate(0.0) {};
+		CurvePoint(Dates::Date Date, double Rate) : _date(Date), _rate(Rate) {};
+
+		friend bool operator ==(const CurvePoint& P1, const CurvePoint& P2)
+		{
+			return Dates::Date::Compare(P1._date,P2._date) == 0;
 		}
 	};
 };

@@ -58,6 +58,11 @@ namespace Dates
 			assert(MIN_DAY_IN_MONTH >= _value && _value <= MAX_DAY_IN_MONTH);
 			_value = Value;
 		};
+
+		friend bool operator==(const SDay& Day1, const SDay& Day2)
+		{
+			return Day1._value == Day2._value;
+		}
 	};
 
 	struct SMonth
@@ -80,6 +85,12 @@ namespace Dates
 			assert(dateStringIt != DateStrings.end());
 
 			return dateStringIt->second;
+		}
+
+
+		friend bool operator==(const SMonth& Month1, const SMonth& Month2)
+		{
+			return Month1._value == Month2._value;
 		}
 	};
 
@@ -110,9 +121,11 @@ namespace Dates
 			void AddOneMonth();
 			void AddOneYear();
 			
+			void AddTerm(const std::string& Term);
 			std::string ToNumString();
 			std::string	ToString();
 
-			static bool Compare(const Date& Left, const Date& Right);
+			static int Compare(const Date& Left, const Date& Right);
+			int ToNumDays();
 	};
 }

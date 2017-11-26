@@ -3,17 +3,16 @@
 
 MarketDataComponent::MarketDataComponent()
 {
-
+	_data = { {"1D", 0.55}, {"3M", 0.66}, {"1Y", 1.45}, {"5Y", 2.33} };
 }
 
 MarketDataComponent::MarketDataComponent(MarketDataAPI::EMarketComponentType Type)
 {
 	assert(_type > MarketDataAPI::EMarketComponentType::NO_MARKET_COMPONENT && _type < MarketDataAPI::EMarketComponentType::MAX_MARKET_COMPONENT);
 	_type = Type;
-
 }
 
-MarketDataComponent::MarketDataComponent(const std::set< TermRatePair>& Data) :
+MarketDataComponent::MarketDataComponent(const MarketDataComponentVector& Data) :
 	_data(Data), _type(MarketDataAPI::EMarketComponentType::NO_MARKET_COMPONENT)
 {
 
@@ -41,13 +40,24 @@ MarketDataComponent::~MarketDataComponent()
 void MarketDataComponent::AddItem(std::string Term, double Rate)
 {
 	assert(!Term.empty());
-	_data.insert(TermRatePair(Term, Rate));
+	_data.push_back(TermRatePair(Term, Rate));
 
 }
 
 void MarketDataComponent::Clear()
 {
 	_data.clear();
+}
+
+TermRatePair MarketDataComponent::GetItemAt(int Index) const
+{
+	assert(Index >= 0 && Index < _data.size());
+	return _data[Index];
+}
+
+int MarketDataComponent::GetSize() const
+{
+	return (int)_data.size();
 }
 
 MarketDataAPI::EMarketComponentType MarketDataComponent::GetType()
